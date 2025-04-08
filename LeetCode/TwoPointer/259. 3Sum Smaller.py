@@ -38,76 +38,31 @@ from typing import List  # Import List for type hinting
 
 def threeSumSmaller(nums: List[int], target: int) -> int:
 
-    nums.sort()
-    triplet_count=0
+    nums.sort()  # Sort the array to enable two-pointer technique
+    triplet_count = 0  # Initialize counter for valid triplets
 
-    for idx in range(len(nums)):
+    # Iterate through the array, fixing one element at a time
+    for idx in range(len(nums) - 2):  # Up to len(nums)-3 since we need 3 elements total
 
-        start_p=idx+1
-        end_p=len(nums)-1
+        start_p = idx + 1  # Start pointer just after fixed element
+        end_p = len(nums) - 1  # End pointer at the last index
 
-        while end_p>=start_p:
+        # Use two-pointer technique to find valid pairs
+        while end_p > start_p:
 
-            total=nums[idx]+nums[start_p]+nums[end_p]
+            curr_sum = nums[idx] + nums[start_p] + nums[end_p]  # Calculate sum of triplet
 
-            if total<target:
-                triplet_count=triplet_count+end_p-start_p
-                start_p=start_p+1
+            if curr_sum < target:
+                # All elements between start_p and end_p will form valid triplets with nums[idx]
+                triplet_count += end_p - start_p
+                # variation if we wanted to return the list of triplets
+                # for k in range(start_p + 1, end_p + 1):
+                #     result.append([nums[idx], nums[start_p], nums[k]])
+                start_p += 1  # Move start pointer to the right to explore more pairs
             else:
-                end_p=end_p-1
+                end_p -= 1  # Move end pointer left to reduce the sum
 
-    return triplet_count
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # nums.sort()  # Sort the array to enable two-pointer technique
-    # triplet_count = 0  # Initialize counter for valid triplets
-    #
-    # # Iterate through the array, fixing one element at a time
-    # for idx in range(len(nums) - 2):  # Up to len(nums)-3 since we need 3 elements total
-    #
-    #     start_p = idx + 1  # Start pointer just after fixed element
-    #     end_p = len(nums) - 1  # End pointer at the last index
-    #
-    #     # Use two-pointer technique to find valid pairs
-    #     while end_p > start_p:
-    #
-    #         curr_sum = nums[idx] + nums[start_p] + nums[end_p]  # Calculate sum of triplet
-    #
-    #         if curr_sum < target:
-    #             # All elements between start_p and end_p will form valid triplets with nums[idx]
-    #             triplet_count += end_p - start_p
-    #             # variation if we wanted to return the list of triplets
-    #             # for k in range(start_p + 1, end_p + 1):
-    #             #     result.append([nums[idx], nums[start_p], nums[k]])
-    #             start_p += 1  # Move start pointer to the right to explore more pairs
-    #         else:
-    #             end_p -= 1  # Move end pointer left to reduce the sum
-    #
-    # return triplet_count  # Return total count of valid triplets
+    return triplet_count  # Return total count of valid triplets
 
 """
 Time Complexity Analysis:

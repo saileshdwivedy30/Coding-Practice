@@ -33,9 +33,22 @@ Constraints:
 
 class Solution:
     def fib(self, n: int) -> int:
-        def recurse(n):
-            if n <= 1:
-                return n
-            return recurse(n - 1) + recurse(n - 2)
 
-        return recurse(n)
+        # Recursive
+        # def recurse(n):
+        #     if n <= 1:
+        #         return n
+        #     return recurse(n - 1) + recurse(n - 2)
+        #
+        # return recurse(n)
+
+        # Non recursive
+        prev1=0
+        prev2=1
+
+        for _ in range(2,n+1):
+
+            curr=prev1+prev2
+            prev1=prev2
+            prev2=curr
+        return curr

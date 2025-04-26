@@ -23,7 +23,7 @@ from typing import List
 class Solution:
     def canAttendAppointments(self, intervals: List[List[int]]) -> bool:
 
-        if intervals==[]:
+        if len(intervals)<=1:
             return True
         intervals.sort(key=lambda x: x[0])
         prev = intervals[0]

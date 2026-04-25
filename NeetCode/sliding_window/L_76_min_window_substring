@@ -1,0 +1,51 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        '''
+        Time = O(n+m), 
+        Space = O(n+m)
+        '''
+        if t == "":
+            return ""
+
+        t_char_count = dict()
+        s_char_count = dict()
+
+        # building dict for t
+        for ch in t:
+            t_char_count[ch] = t_char_count.get(ch,0)+1
+        
+        have = 0
+        need = len(t_char_count)
+        reslen = float('inf')
+        start = 0
+        res = [-1,-1]
+
+        # traversing string s
+        for end in range(len(s)):
+            ch = s[end]
+            s_char_count[ch]=s_char_count.get(ch,0)+1
+
+            # we update have only when we have our required ch which is present in t and the count should also match me love
+            if ch in t_char_count and t_char_count[ch]==s_char_count[ch]:
+                have += 1
+            
+            # have == need means we need to keep checking till this condition hold and fond the min window length
+            while have == need:
+                
+                # when we have the smallest window
+                if reslen>end-start+1:
+                    res = [start,end]
+                    reslen = min(end-start+1,reslen)
+                
+                s_char_count[s[start]] -= 1
+
+                # decrement have because we dont have the same count for our required ch
+                if s[start] in t_char_count and t_char_count[s[start]]>s_char_count[s[start]]:
+                    have -= 1
+                start = start + 1
+
+        l,r = res
+        return "" if reslen ==float('inf') else s[l:r+1]
+
+
+

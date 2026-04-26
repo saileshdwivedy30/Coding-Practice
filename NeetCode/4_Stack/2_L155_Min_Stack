@@ -1,6 +1,8 @@
 # This approach uses two stacks: one for the regular stack and one for tracking the minimum values. 
 # The push operation adds elements to both stacks and keeps track of the minimum, and the pop operation removes from both. 
 # The getMin operation returns the top of the minimum stack which always contains the current minimum element.
+# Time complexity: O(1) for all operations
+# Space complexity: O(2n) = O(n) for the stack and minStack
 
 class MinStack:
 
